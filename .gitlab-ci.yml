@@ -1,0 +1,29 @@
+# GitLab CI/CD Pipeline Blueprint (.gitlab-ci.yml)
+# Purpose: Automated Build, Test, and Security Scanning.
+stages:
+  - build
+  - test
+  - security
+  - deploy
+
+variables:
+  DOCKER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+build_image:
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE .
+    - docker push $DOCKER_IMAGE
+
+security_scan:
+  stage: security
+  script:
+    - trufflehog git file://. --since-commit main
+    - trivy image $DOCKER_IMAGE
+
+deploy_to_prod:
+  stage: deploy
+  script:
+    - kubectl apply -f kubernetes/deployment.yaml
+  only:
+    - main

@@ -1,0 +1,42 @@
+# Kubernetes Deployment Blueprint (deployment.yaml)
+# Purpose: Orchestrating the Adessa Health API in a production cluster.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adessa-api
+  labels:
+    app: adessa-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: adessa-api
+  template:
+    metadata:
+      labels:
+        app: adessa-api
+    spec:
+      containers:
+      - name: api
+        image: gcr.io/adessa-health/api:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adessa-api-service
+spec:
+  selector:
+    app: adessa-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
