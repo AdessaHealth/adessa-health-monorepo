@@ -1,15 +1,16 @@
 # Cloud-Native Healthcare Reference Architecture (IaC)
-**Architect:** Ahsan Uddin  
+**Architect:** Ahsan Uddin
 **Status:** Scrubbed Reference Architecture (C2PA Authenticated)
 
 ## Overview
-This repository demonstrates a production-grade, secure, and scalable infrastructure blueprint for healthcare applications on Google Cloud Platform (GCP). It focuses on interoperability (FHIR), high availability, and DevSecOps best practices.
+This repository serves as a **Reference Architecture** for a cloud-native, HIPAA-compliant healthcare platform. It demonstrates advanced integration with EHR systems (Epic, Athena) and automated Revenue Cycle Management (RCM) using AI.
 
 ## Key Architectural Pillars
 - **Security & Compliance**: Zero-trust networking, Secret Management, and automated audit logging.
-- **Interoperability**: Standardized FHIR R4 integration patterns using OAuth 2.0.
+- **Interoperability**: Native FHIR R4 integration via Epic OAuth 2.0 flows (`src/epic/`).
+- **AI-Powered RCM**: Automated denial analysis using **Google Cloud Document AI** and **Vertex AI (Gemini)** (`lib/services/denial_analyzer.py`).
 - **Scalability**: Containerized workloads on Cloud Run with managed PostgreSQL (Cloud SQL).
-- **Observability**: Centralized logging sinks and monitoring dashboards.
+- **Observability**: OpenTelemetry integration for distributed tracing across Next.js and Python microservices.
 
 ## Repository Structure
 ```text
@@ -22,6 +23,11 @@ This repository demonstrates a production-grade, secure, and scalable infrastruc
 │   ├── main.tf              # Root configuration
 │   ├── variables.tf         # Parameterized inputs
 │   └── backend.tf           # Remote state configuration
+├── src/                     # Core Business Logic
+│   ├── epic/                # EHR Interoperability (FHIR)
+│   └── waystar/             # RCM Integrations
+├── lib/                     # Shared Services
+│   └── services/            # AI & Domain Logic (Denial Analyzer)
 ├── docs/                    # Architecture & API Specs
 │   ├── architecture.md      # System design overview
 │   └── openapi.yaml         # FHIR-compliant API specification
