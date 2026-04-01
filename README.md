@@ -1,16 +1,14 @@
-# Cloud-Native Healthcare Reference Architecture (IaC)
+# Healthcare Compliance Accelerator
 **Architect:** Ahsan Uddin
-**Status:** Scrubbed Reference Architecture (C2PA Authenticated)
+**Status:** Production-Hardened Reference Architecture (C2PA Authenticated)
 
 ## Overview
-This repository serves as a **Reference Architecture** for a cloud-native, HIPAA-compliant healthcare platform. It demonstrates advanced integration with EHR systems (Epic, Athena) and automated Revenue Cycle Management (RCM) using AI.
+The **Healthcare Compliance Accelerator** is a cloud-native, HIPAA-compliant framework designed to eliminate technical doubt in high-stakes healthcare environments. It provides a pre-configured engine for advanced EHR integration (Epic, Athena) and automated Revenue Cycle Management (RCM) using Agentic AI.
 
-## Key Architectural Pillars
-- **Security & Compliance**: Zero-trust networking, Secret Management, and automated audit logging.
-- **Interoperability**: Native FHIR R4 integration via Epic OAuth 2.0 flows (`src/epic/`).
-- **AI-Powered RCM**: Automated denial analysis using **Google Cloud Document AI** and **Vertex AI (Gemini)** (`lib/services/denial_analyzer.py`).
-- **Scalability**: Containerized workloads on Cloud Run with managed PostgreSQL (Cloud SQL).
-- **Observability**: OpenTelemetry integration for distributed tracing across Next.js and Python microservices.
+## Key Strategic Pillars
+- **"Eliminating Doubt" in Compliance**: Zero-trust networking and automated audit trails baked into the IaC.
+- **Interoperability Accelerator**: Native FHIR R4 integration via Epic OAuth 2.0 flows.
+- **Agentic RCM**: Automated denial analysis using **Google Cloud Document AI** and **Vertex AI (Gemini)**.
 
 ## Repository Structure
 ```text
